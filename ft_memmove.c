@@ -5,33 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 19:06:06 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/06 19:22:43 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:55:01 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:55:02 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void				*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char *d;
-	unsigned char *s;
+	register unsigned char	*dest;
+	register unsigned char	*source;
 
-	d = (unsigned char*)dst;
-	s = (unsigned char*)src;
-	if (d == NULL && s == NULL)
+	dest = (unsigned char*)dst;
+	source = (unsigned char*)src;
+	if (dest == NULL && source == NULL)
 		return (NULL);
-	if (d <= s)
-	{
-		while (len--)
-			*d++ = *s++;
-	}
+	if (dest <= source)
+		return (ft_memcpy(dst, src, len));
 	else
 	{
-		d += len;
-		s += len;
+		dest += len;
+		source += len;
+		while (len >= 8)
+		{
+			dest -= 8;
+			source -= 8;
+			*((uint64_t*)dest) = *((uint64_t*)source);
+			len -= 8;
+		}
 		while (len--)
-			*(--d) = *(--s);
+			*(--dest) = *(--source);
 	}
 	return (dst);
 }

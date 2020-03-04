@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 15:16:19 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/15 18:25:19 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:56:22 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:56:24 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strany(char const *str, int c)
+int	ft_strany(char const *str, const int32_t c)
 {
 	if (str == NULL)
 		return (0);

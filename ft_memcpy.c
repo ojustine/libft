@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 18:26:52 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/06 19:05:09 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:54:46 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:54:48 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	void *ret;
+	const void				*ret = dst;
+	register unsigned char	*dest;
+	register unsigned char	*source;
 
-	ret = dst;
-	if ((unsigned char*)dst == NULL && (unsigned char*)src == NULL)
+	dest = (unsigned char*)dst;
+	source = (unsigned char*)src;
+	if (dest == NULL && source == NULL)
 		return (NULL);
+	while (n >= 8)
+	{
+		*((uint64_t*)dest) = *((uint64_t*)source);
+		dest += 8;
+		source += 8;
+		n -= 8;
+	}
 	while (n--)
-		*((unsigned char*)dst++) = *((unsigned char*)src++);
-	return (ret);
+		*dest++ = *source++;
+	return ((void*)ret);
 }

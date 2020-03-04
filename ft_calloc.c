@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:53:00 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:53:02 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_calloc(size_t n_elem, size_t elem_size)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
+	register void	*ptr;
+	register size_t full_size;
 
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
-	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
-	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	if ((full_size = n_elem * elem_size) == 0)
+		full_size = 1;
+	ptr = malloc(full_size);
+	ft_assert(ptr != NULL, __FUNCTION__, "malloc error");
+	ft_bzero(ptr, full_size);
+	return (ptr);
 }

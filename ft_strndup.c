@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 22:55:19 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/10 23:25:47 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:57:15 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:57:16 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 char	*ft_strndup(const char *s1, size_t n)
 {
-	size_t	len;
-	char	*dst;
-	char	*dst_begin;
+	register size_t	len;
+	register char	*dst;
+	char			*dst_begin;
 
-	len = ft_strnlen(s1, n);
-	dst = ft_strnew(len);
-	dst_begin = NULL;
-	if (dst)
+	len = ft_strnlen(s1, n) + 1;
+	dst = malloc(len);
+	if ((dst_begin = dst) == NULL)
+		return (NULL);
+	dst[--len] = '\0';
+	while (len > 8)
 	{
-		dst_begin = dst;
-		while (len--)
-			*dst++ = *s1++;
-		*dst = '\0';
+		*((uint64_t*)dst) = *((uint64_t*)s1);
+		dst += 8;
+		s1 += 8;
+		len -= 8;
 	}
+	while (len--)
+		*dst++ = *s1++;
 	return (dst_begin);
 }

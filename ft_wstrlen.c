@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_wstrlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:59:42 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:59:43 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_wstrlen(const wint_t *s)
 {
 	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
 
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
+	len = 0;
+	while (*s != L'\0')
 	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
+		len++;
+		len += *s > 0xFFFF;
+		len += *s > 0x7FF;
+		len += *s > 0x7F;
+		++s;
 	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	return (len);
 }

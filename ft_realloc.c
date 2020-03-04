@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:56:07 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:56:09 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
+	void	*new_mem;
 
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
-	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
-	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	if (!ptr)
+		return (malloc(new_size));
+	new_mem = malloc(new_size);
+	ft_assert(new_mem != NULL, __FUNCTION__, "malloc error");
+	ft_memcpy(new_mem, ptr, old_size < new_size ? old_size : new_size);
+	free(ptr);
+	return (new_mem);
 }

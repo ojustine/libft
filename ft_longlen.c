@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_longlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:54:25 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:54:27 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_longlen(register int64_t n)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
+	register int64_t	rank;
+	register size_t		i;
 
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
+	if (n < 0)
 	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
+		if (n == INT64_MIN)
+			return (19);
+		else
+			n = -n;
 	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	rank = 10;
+	i = 1;
+	while (i < 19)
+	{
+		if (n < rank)
+			return (i);
+		rank *= 10;
+		i++;
+	}
+	return (19);
 }

@@ -23,6 +23,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <wctype.h>
 
 typedef struct		s_list
 {
@@ -31,8 +32,33 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+uint32_t			ft_abs(int32_t n);
+void				ft_assert(int_fast32_t to_check, const char *func,
+					const char *message);
+void				*ft_calloc(size_t n_elem, size_t elem_size);
+int32_t				ft_divmod(const int32_t dividend, const int32_t divisor,
+					int32_t *remainder);
+size_t				ft_intlen(register int32_t n);
+long double			ft_long_pow(const long double base,
+					register int_fast16_t power);
+size_t				ft_longlen(register int64_t n);
+int32_t				ft_moddiv(const int32_t dividend, const int32_t divisor,
+					int32_t *quotient);
+double				ft_pow(const double base, register int_fast16_t power);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void				ft_strrev(register char *begin, register char *end);
+size_t				ft_uitoa_base(uint32_t value, char *buff,
+					const int_fast16_t base, const int_fast16_t is_upper);
+size_t				ft_uitoa_dec(const uint32_t val, char *buff);
+size_t				ft_uitoa_hex(const uint32_t value, char *buff,
+					const int_fast16_t is_upper);
+size_t				ft_ultoa_base(uint64_t value, char *buff,
+					const int_fast16_t base, const int_fast16_t is_upper);
+size_t				ft_ultoa_hex(const uint64_t value, char *buff,
+					const int_fast16_t is_upper);
+size_t				ft_wstrlen(const wint_t *s);
 void				*ft_memset(void *b, int c, size_t n);
-void				ft_bzero(void *s, size_t n);
+void				*ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
@@ -107,5 +133,5 @@ void				ft_latadd_end(t_list **alst, t_list *new);
 void				ft_lstprint(t_list *list, int isstr);
 int					ft_lst_getinx(t_list *list, void *content, size_t size);
 void				ft_lstdelinx(t_list **alst, int inx,
-								void (*del)(void*, size_t));
+					void (*del)(void*, size_t));
 #endif

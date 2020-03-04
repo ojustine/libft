@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 22:32:17 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/07 22:36:48 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:57:37 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:57:39 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	if (s1 == NULL || s2 == NULL)
+	if (s1 == NULL || s2 == NULL || n == 0)
 		return (0);
-	if (ft_strncmp(s1, s2, n) == 0)
-		return (1);
-	return (0);
+	while (*s1 == *s2 && n > 0)
+	{
+		if (*s1 == 0)
+			return (1);
+		s1++;
+		s2++;
+		n--;
+	}
+	return ((n == 0) ? 1 : 0);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 20:23:57 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/06 20:45:34 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:57:02 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:57:05 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t len;
+	register const char *tmp = s;
 
-	len = 0;
-	while (*s++)
-		len++;
-	return (len);
+	if (!s)
+		return (0);
+	while (*tmp)
+		tmp++;
+	return (tmp - s);
 }

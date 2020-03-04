@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_divmod.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:53:18 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:53:20 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int32_t	ft_divmod(const int32_t dividend, const int32_t divisor,
+		int32_t *remainder)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
-
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
-	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
-	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	*remainder = dividend % divisor;
+	return (dividend / divisor);
 }

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:53:34 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:53:35 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+size_t	ft_intlen(register int32_t n)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
+	static const int32_t	sizes[10] = {9, 99, 999, 9999, 99999, 999999,
+							9999999, 99999999, 999999999, INT32_MAX};
+	register size_t			i;
 
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
+	if (n < 0)
 	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
+		if (n == INT32_MIN)
+			return (10);
+		else
+			n = -n;
 	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	i = 0;
+	while (i++ < 11)
+		if (n <= sizes[i - 1])
+			return (i);
+	return (10);
 }

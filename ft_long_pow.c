@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_long_pow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 13:56:36 by ojustine          #+#    #+#             */
-/*   Updated: 2020/03/04 13:56:37 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:54:12 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:54:14 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+long double	ft_long_pow(const long double base, register int_fast16_t power)
 {
-	register size_t	len;
-	register char	*dst;
-	char			*dst_begin;
-
-	len = ft_strlen(s1) + 1;
-	dst = malloc(len);
-	if ((dst_begin = dst) == NULL)
-		return (NULL);
-	dst[--len] = '\0';
-	while (len > 8)
-	{
-		*((uint64_t*)dst) = *((uint64_t*)s1);
-		dst += 8;
-		s1 += 8;
-		len -= 8;
-	}
-	while (len--)
-		*dst++ = *s1++;
-	return (dst_begin);
+	if (power == 0)
+		return (1);
+	if (power < 0)
+		return (ft_long_pow(1 / base, -power));
+	if (power & 1)
+		return (base * ft_long_pow(base, power - 1));
+	return (ft_long_pow(base * base, power / 2));
 }

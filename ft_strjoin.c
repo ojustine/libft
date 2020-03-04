@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ojustine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 23:23:13 by ojustine          #+#    #+#             */
-/*   Updated: 2019/09/07 23:37:28 by ojustine         ###   ########.fr       */
+/*   Created: 2020/03/04 13:56:52 by ojustine          #+#    #+#             */
+/*   Updated: 2020/03/04 13:56:53 by ojustine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *new;
-	char *ret;
+	register char			*res;
+	register const char		*src1 = s1;
+	register const char		*src2 = s2;
+	register const size_t	len1 = ft_strlen(src1);
+	register const size_t	len2 = ft_strlen(src2);
 
-	if (s1 == NULL || s2 == NULL)
+	if (src1 == NULL || src2 == NULL)
 		return (NULL);
-	new = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
-	if (!new)
-		return (NULL);
-	ret = new;
-	while (*s1)
-		*new++ = *s1++;
-	while (*s2)
-		*new++ = *s2++;
-	return (ret);
+	res = malloc(len1 + len2 + 1);
+	if (res)
+	{
+		ft_memcpy(res, src1, len1);
+		ft_memcpy(res + len1, src2, len2 + 1);
+	}
+	return (res);
 }
