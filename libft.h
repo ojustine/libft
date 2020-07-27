@@ -12,11 +12,6 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define ABS(X) (((X) > 0) ? (X) : -(X))
-# define MIN(X, Y) (((X) <= (Y)) ? (X) : (Y))
-# define MAX(X, Y) (((X) >= (Y)) ? (X) : (Y))
-# define ISNEG(X) (((X) < 0) ? (1) : (0))
-# define REV(X) (-(X))
 # define INF (1.0 / 0.0)
 # define NAN (0.0 / 0.0)
 
@@ -24,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <wctype.h>
+# include <stdint.h>
 
 typedef struct		s_list
 {
@@ -36,26 +32,26 @@ uint32_t			ft_abs(int32_t n);
 void				ft_assert(int_fast32_t to_check, const char *func,
 					const char *message);
 void				*ft_calloc(size_t n_elem, size_t elem_size);
-int32_t				ft_divmod(const int32_t dividend, const int32_t divisor,
+int32_t				ft_divmod(int32_t dividend, int32_t divisor,
 					int32_t *remainder);
 size_t				ft_intlen(register int32_t n);
-long double			ft_long_pow(const long double base,
+long double			ft_long_pow(long double base,
 					register int_fast16_t power);
 size_t				ft_longlen(register int64_t n);
-int32_t				ft_moddiv(const int32_t dividend, const int32_t divisor,
+int32_t				ft_moddiv(int32_t dividend, int32_t divisor,
 					int32_t *quotient);
-double				ft_pow(const double base, register int_fast16_t power);
+double				ft_pow(double base, register int_fast16_t power);
 void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void				ft_strrev(register char *begin, register char *end);
 size_t				ft_uitoa_base(uint32_t value, char *buff,
-					const int_fast16_t base, const int_fast16_t is_upper);
-size_t				ft_uitoa_dec(const uint32_t val, char *buff);
-size_t				ft_uitoa_hex(const uint32_t value, char *buff,
-					const int_fast16_t is_upper);
+					int_fast16_t base, int_fast16_t is_upper);
+size_t				ft_uitoa_dec(uint32_t val, char *buff);
+size_t				ft_uitoa_hex(uint32_t value, char *buff,
+					int_fast16_t is_upper);
 size_t				ft_ultoa_base(uint64_t value, char *buff,
-					const int_fast16_t base, const int_fast16_t is_upper);
-size_t				ft_ultoa_hex(const uint64_t value, char *buff,
-					const int_fast16_t is_upper);
+					int_fast16_t base, int_fast16_t is_upper);
+size_t				ft_ultoa_hex(uint64_t value, char *buff,
+					int_fast16_t is_upper);
 size_t				ft_wstrlen(const wint_t *s);
 void				*ft_memset(void *b, int c, size_t n);
 void				*ft_bzero(void *s, size_t n);
