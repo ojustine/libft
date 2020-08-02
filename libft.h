@@ -12,13 +12,10 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define INF (1.0 / 0.0)
-# define NAN (0.0 / 0.0)
 
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <wctype.h>
 # include <stdint.h>
 
 typedef struct		s_list
@@ -101,6 +98,7 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strequ(char const *s1, char const *s2);
+int					ft_strequ_ignore_case(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -125,9 +123,13 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstlen(t_list *lst);
-void				ft_latadd_end(t_list **alst, t_list *new);
+void				ft_lstadd_end(t_list **alst, t_list *new);
 void				ft_lstprint(t_list *list, int isstr);
 int					ft_lst_getinx(t_list *list, void *content, size_t size);
 void				ft_lstdelinx(t_list **alst, int inx,
 					void (*del)(void*, size_t));
+void				ft_log_error(const char *message, const char *cause,
+					const char *func, const char *file);
+void				ft_log_info(const char *message, const char *desc,
+					const char *func, const char *file);
 #endif

@@ -74,7 +74,7 @@ double			ft_atof(const char *str)
 	char	*s;
 
 	if (str == NULL)
-		return (NAN);
+		return (0.0 / 0.0);
 	b = 0.0;
 	s = (char*)str;
 	s = ft_strrew(s, ft_isspace);
@@ -88,8 +88,8 @@ double			ft_atof(const char *str)
 		return (ft_exp_dbl(a + b, e) * sign);
 	}
 	if (ft_strcmpi(s, "inf") == 0)
-		return (INF * sign);
+		return (1.0 / 0.0 * sign);
 	if (ft_strcmpi(s, "nan") == 0)
-		return (NAN);
+		return (0.0 / 0.0);
 	return ((a + b) * sign);
 }
